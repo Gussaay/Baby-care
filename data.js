@@ -1,0 +1,58 @@
+// Built-in catalogue: skill domains, skills and toy types with suggested skills.
+window.CATALOGUE = {
+  domains: [
+    { id: 'fine',     name: 'Fine motor',       icon: '✋', color: '#e07a5f' },
+    { id: 'gross',    name: 'Gross motor',      icon: '🏃', color: '#3d8b7d' },
+    { id: 'language', name: 'Language',         icon: '💬', color: '#5b7fd1' },
+    { id: 'thinking', name: 'Thinking',         icon: '🧩', color: '#9b6bc9' },
+    { id: 'social',   name: 'Social-emotional', icon: '🤝', color: '#d4a017' },
+    { id: 'senses',   name: 'Senses',           icon: '🌈', color: '#d9667b' },
+    { id: 'create',   name: 'Creativity',       icon: '🎨', color: '#4fa3c7' },
+    { id: 'numbers',  name: 'Numbers & shapes', icon: '🔢', color: '#7a9a3a' }
+  ],
+  skills: [
+    { id: 'grasp',        domain: 'fine',     name: 'Grasping & pinching' },
+    { id: 'handeye',      domain: 'fine',     name: 'Hand-eye coordination' },
+    { id: 'pencil',       domain: 'fine',     name: 'Pencil grip & drawing' },
+    { id: 'balance',      domain: 'gross',    name: 'Balance' },
+    { id: 'throwcatch',   domain: 'gross',    name: 'Throwing & catching' },
+    { id: 'crawlwalk',    domain: 'gross',    name: 'Crawling, walking, running' },
+    { id: 'vocab',        domain: 'language', name: 'New words' },
+    { id: 'listening',    domain: 'language', name: 'Listening' },
+    { id: 'storytelling', domain: 'language', name: 'Storytelling' },
+    { id: 'problem',      domain: 'thinking', name: 'Problem solving' },
+    { id: 'causeeffect',  domain: 'thinking', name: 'Cause & effect' },
+    { id: 'memory',       domain: 'thinking', name: 'Memory & focus' },
+    { id: 'sharing',      domain: 'social',   name: 'Sharing & turn-taking' },
+    { id: 'emotions',     domain: 'social',   name: 'Naming feelings' },
+    { id: 'pretend',      domain: 'social',   name: 'Pretend & role play' },
+    { id: 'touch',        domain: 'senses',   name: 'Touch & texture' },
+    { id: 'sound',        domain: 'senses',   name: 'Sound & rhythm' },
+    { id: 'colours',      domain: 'senses',   name: 'Colours' },
+    { id: 'imagination',  domain: 'create',   name: 'Imagination' },
+    { id: 'building',     domain: 'create',   name: 'Building & designing' },
+    { id: 'art',          domain: 'create',   name: 'Art & making' },
+    { id: 'counting',     domain: 'numbers',  name: 'Counting' },
+    { id: 'shapes',       domain: 'numbers',  name: 'Shapes' },
+    { id: 'sorting',      domain: 'numbers',  name: 'Sorting & matching' }
+  ],
+  toyTypes: [
+    { id: 'blocks',   name: 'Blocks',          emoji: '🧱', age: [12, 72], skills: ['building', 'handeye', 'problem', 'counting', 'shapes'] },
+    { id: 'puzzle',   name: 'Puzzle',          emoji: '🧩', age: [18, 96], skills: ['problem', 'shapes', 'grasp', 'memory'] },
+    { id: 'ball',     name: 'Ball',            emoji: '⚽', age: [6, 120], skills: ['throwcatch', 'crawlwalk', 'sharing', 'handeye'] },
+    { id: 'book',     name: 'Picture book',    emoji: '📚', age: [0, 96],  skills: ['vocab', 'listening', 'storytelling', 'emotions'] },
+    { id: 'sorter',   name: 'Shape sorter',    emoji: '🔷', age: [9, 36],  skills: ['shapes', 'sorting', 'grasp', 'problem'] },
+    { id: 'stacking', name: 'Stacking cups',   emoji: '🥤', age: [6, 36],  skills: ['handeye', 'sorting', 'counting', 'causeeffect'] },
+    { id: 'crayons',  name: 'Crayons & paper', emoji: '🖍️', age: [18, 120], skills: ['pencil', 'art', 'colours', 'imagination'] },
+    { id: 'dough',    name: 'Play dough',      emoji: '🟣', age: [24, 96], skills: ['touch', 'grasp', 'art', 'imagination'] },
+    { id: 'doll',     name: 'Doll / soft toy', emoji: '🧸', age: [0, 96],  skills: ['pretend', 'emotions', 'vocab', 'touch'] },
+    { id: 'car',      name: 'Car / vehicle',   emoji: '🚗', age: [12, 96], skills: ['pretend', 'causeeffect', 'crawlwalk', 'imagination'] },
+    { id: 'music',    name: 'Musical toy',     emoji: '🥁', age: [6, 96],  skills: ['sound', 'causeeffect', 'listening'] },
+    { id: 'kitchen',  name: 'Play kitchen',    emoji: '🍳', age: [24, 96], skills: ['pretend', 'sharing', 'vocab', 'sorting'] },
+    { id: 'beads',    name: 'Threading beads', emoji: '📿', age: [30, 96], skills: ['grasp', 'handeye', 'counting', 'colours'] },
+    { id: 'rattle',   name: 'Rattle / sensory', emoji: '🪇', age: [0, 12], skills: ['sound', 'grasp', 'touch', 'causeeffect'] },
+    { id: 'bike',     name: 'Ride-on / bike',  emoji: '🚲', age: [18, 120], skills: ['balance', 'crawlwalk'] },
+    { id: 'game',     name: 'Board / card game', emoji: '🎲', age: [36, 144], skills: ['sharing', 'counting', 'memory', 'emotions'] },
+    { id: 'other',    name: 'Other',           emoji: '🎁', age: [0, 144], skills: [] }
+  ]
+};

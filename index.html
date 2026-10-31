@@ -1,0 +1,34 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Play Organiser</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <header class="topbar">
+    <div class="brand">🧸 <span>Play Organiser</span></div>
+    <label class="child-pick">
+      <span class="sr">Child</span>
+      <select id="childSelect" aria-label="Selected child"></select>
+    </label>
+  </header>
+
+  <nav class="tabs" role="tablist">
+    <button data-view="toys" class="active">Toys</button>
+    <button data-view="skills">Skills</button>
+    <button data-view="log">Play log</button>
+    <button data-view="family">Family</button>
+  </nav>
+
+  <main id="view"></main>
+
+  <button id="fabLog" class="fab" aria-label="Log play">▶ Log play</button>
+
+  <dialog id="dlg"><div id="dlgBody"></div></dialog>
+
+  <script src="data.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
