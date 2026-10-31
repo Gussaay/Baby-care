@@ -63,6 +63,8 @@ jobs:
     runs-on: ubuntu-latest
     permissions:
       contents: write
+    env:
+      HAS_KEYSTORE: ${{ secrets.KEYSTORE_BASE64 != '' }}
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
@@ -91,9 +93,36 @@ jobs:
           sed -i -e "s/versionCode [0-9]*/versionCode ${{ steps.version.outputs.code }}/" \
                  -e "s/versionName \".*\"/versionName \"${{ steps.version.outputs.version }}\"/" android/app/build.gradle
 
-      # Debug-signed until a release keystore is added (like Easy Pedia's KEYSTORE_* secrets).
-      - name: Build APK
+      # Android only installs an update when it is signed with the same key as
+      # the installed app, so published APKs need one fixed key (like Easy Pedia):
+      # secrets KEYSTORE_BASE64 (base64 of the .jks/.p12), KEYSTORE_PASSWORD,
+      # KEY_ALIAS and KEY_PASSWORD (optional, defaults to KEYSTORE_PASSWORD).
+      - name: Build signed release APK
+        if: env.HAS_KEYSTORE == 'true'
+        env:
+          KEYSTORE_BASE64: ${{ secrets.KEYSTORE_BASE64 }}
+          KEYSTORE_PASSWORD: ${{ secrets.KEYSTORE_PASSWORD }}
+          KEY_ALIAS: ${{ secrets.KEY_ALIAS }}
+          KEY_PASSWORD: ${{ secrets.KEY_PASSWORD }}
         run: |
+          printf '%s' "$KEYSTORE_BASE64" | base64 --decode > "$RUNNER_TEMP/release.keystore"
+          cd android
+          chmod +x gradlew
+          ./gradlew assembleRelease
+          BT=$(ls -d ${ANDROID_HOME}/build-tools/* | sort -V | tail -1)
+          $BT/zipalign -p 4 app/build/outputs/apk/release/app-release-unsigned.apk "$RUNNER_TEMP/aligned.apk"
+          $BT/apksigner sign --ks "$RUNNER_TEMP/release.keystore" \
+            --ks-key-alias "$KEY_ALIAS" --ks-pass env:KEYSTORE_PASSWORD \
+            --key-pass "env:$( [ -n "$KEY_PASSWORD" ] && echo KEY_PASSWORD || echo KEYSTORE_PASSWORD )" \
+            --out "../$APK_NAME" "$RUNNER_TEMP/aligned.apk"
+          rm -f "$RUNNER_TEMP/release.keystore"
+
+      # Fallback until the keystore secrets are added: debug keys change on every
+      # run, so installed apps cannot update in place.
+      - name: Build debug APK (no keystore configured)
+        if: env.HAS_KEYSTORE != 'true'
+        run: |
+          echo "::warning::KEYSTORE_BASE64 secret not set - this APK is debug-signed and cannot update an earlier install."
           cd android
           chmod +x gradlew
           ./gradlew assembleDebug
@@ -106,7 +135,7 @@ jobs:
           retention-days: 30
 
       - name: Publish GitHub Release
-        if: github.event_name == 'push'
+        if: github.event_name == 'push' && env.HAS_KEYSTORE == 'true'
         uses: softprops/action-gh-release@v2
         with:
           tag_name: v${{ steps.version.outputs.version }}

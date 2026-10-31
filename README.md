@@ -52,4 +52,4 @@ It needs one repository secret: **`FIREBASE_SERVICE_ACCOUNT_BABY_CARE_PLAY`**. C
   GitHub → Settings → Secrets and variables → Actions → *New repository secret*.
 
 Until it is added the workflow still builds and tests, and says the secret is missing.
-The APK is debug-signed until release keystore secrets are added (same approach as Easy Pedia).
+The APK is published as a GitHub Release only once a fixed signing key is set (secrets `KEYSTORE_BASE64`, `KEYSTORE_PASSWORD`, `KEY_ALIAS`, optional `KEY_PASSWORD`, same as Easy Pedia), because Android refuses updates signed with a different key. Without them each run still builds a test APK (download it from the run's artifacts).
