@@ -23,6 +23,11 @@ jobs:
   web:
     name: Test, build and deploy web
     runs-on: ubuntu-latest
+    # The Firebase action posts a check and the preview link on the PR.
+    permissions:
+      contents: read
+      checks: write
+      pull-requests: write
     env:
       # Created with `firebase init hosting:github`, or by pasting a service-account
       # JSON key into GitHub > Settings > Secrets and variables > Actions.
