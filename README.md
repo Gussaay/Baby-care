@@ -26,3 +26,21 @@ Data is stored on the device (`localStorage`). Click **try with sample data** to
 | `data.js` | Skill catalogue and toy types with suggested skills |
 | `app.js` | App logic: toys, play log, skills dashboard, storage |
 | `docs/DESIGN.md` | Design: data model, screens, insights, future modules |
+
+## Deploy to Firebase Hosting
+
+Project: `baby-care-play` → https://baby-care-play.web.app
+
+**From your computer (once):**
+
+```bash
+npm install -g firebase-tools
+firebase login
+firebase deploy --only hosting
+```
+
+**Automatically from GitHub:** `.github/workflows/firebase-deploy.yml` deploys on every push to
+`main` (or this branch). It needs a repository secret `FIREBASE_SERVICE_ACCOUNT_BABY_CARE_PLAY`
+— the easiest way to create it is `firebase init hosting:github` on your computer, or paste a
+service-account JSON key (Firebase console → Project settings → Service accounts) into
+GitHub → Settings → Secrets and variables → Actions.
