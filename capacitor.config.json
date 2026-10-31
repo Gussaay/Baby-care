@@ -1,0 +1,11 @@
+{
+  "appId": "com.babycare.play",
+  "appName": "Baby care",
+  "webDir": "dist",
+  "server": { "androidScheme": "https" },
+  "plugins": {
+    "SplashScreen": { "launchShowDuration": 1000, "launchAutoHide": true, "backgroundColor": "#E8577D", "showSpinner": false },
+    "StatusBar": { "style": "DARK", "backgroundColor": "#E8577D" }
+  },
+  "android": { "adjustMarginsForEdgeToEdge": "force" }
+}

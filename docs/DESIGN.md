@@ -1,4 +1,4 @@
-# Play Organiser — Design
+# Baby care (Play Organiser) — Design
 
 A simple app that helps families organise play for their children.
 The app is built as modules; this document covers **Module 1: Toy Box & Skills**.
@@ -55,11 +55,14 @@ PlaySession{ id, toyId, childId, date, minutes, enjoyment(1-3), note }
 
 ## Technical choices
 
-* Single-page web app, plain HTML/CSS/JavaScript, no build step — opens from `index.html`
-  and works offline, on phones and desktops.
-* Data stored in the browser (`localStorage`) with **Export / Import JSON** for backup and
-  moving between devices. A backend (shared family account, sync) is a later module.
+* React + Vite web app, also shipped as a native Android app with Capacitor (same stack as Easy Pedia).
+  Installable as a PWA and works offline.
+* **Bilingual**: English and Arabic. All text lives in `src/lib/strings.js`; the catalogue carries
+  `{ en, ar }` names. Arabic switches the page to `dir="rtl"`; layouts use logical (start/end) spacing.
+* Data stored on the device (`localStorage`) with **Export / Import JSON** for backup. A backend
+  (shared family account, sync with Firebase) is a later module.
 * Photos are resized to 320px in the browser before saving to keep storage small.
+* Firebase project `baby-care-play`: Hosting + Analytics.
 
 ## Future modules
 
