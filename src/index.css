@@ -1,0 +1,20 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+body, #root { overflow-x: hidden; overflow-x: clip; }
+#root { min-height: 100vh; min-height: 100dvh; }
+body {
+  @apply bg-brand-50 text-slate-900 antialiased;
+  -webkit-tap-highlight-color: transparent;
+  overscroll-behavior-y: none;
+}
+html[lang='ar'] body { font-family: 'Cairo', system-ui, sans-serif; }
+
+@layer utilities {
+  .pt-safe { padding-top: env(safe-area-inset-top); }
+  .pb-safe { padding-bottom: max(env(safe-area-inset-bottom), 1.25rem); }
+  .no-scrollbar { scrollbar-width: none; }
+  .no-scrollbar::-webkit-scrollbar { display: none; }
+}
+summary::-webkit-details-marker { display: none; }
